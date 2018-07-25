@@ -1,0 +1,8 @@
+<launch>
+
+  <node name="rvizvisualisation" pkg="rviz" type="rviz"  args="-d $(find catkin_ws)/src/all_in_one/launch/auto_scanner.rviz" />
+  <node pkg="all_in_one" name="preprocess" type="preprocess_node" launch-prefix="xterm -e" />
+  <node pkg="all_in_one" name="process" type="process_node" launch-prefix="xterm -e" />
+  <node pkg="all_in_one" name="extract_plane" type="extract_plane_node" launch-prefix="xterm -e" />
+
+</launch>
