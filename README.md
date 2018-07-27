@@ -1,4 +1,4 @@
-#auto-scanner_hokuyo_ros
+# auto-scanner_hokuyo_ros
 
 Scanning cuboid commodities randomly on conveyor belt for calculating sizes based on HOKUYO 2D-Lidar(UST-10/20LX) and ROS(Robot Operating System).
 
@@ -14,7 +14,7 @@ ROS graph of nodes:
 
 ![ros_node_graph](./resources/whole_pipeline.png)
 
-##Build and Run 
+## Build and Run 
 
 * Install and configure ROS environment [(roswiki install)](http://wiki.ros.org/cn/ROS/Tutorials/InstallingandConfiguringROSEnvironment).
 
