@@ -198,6 +198,16 @@ public:
 		m_subscriber = m_nodeHandle.subscribe(topicStr, queueLen, pointCloudCallback);
 	}
 
+	inline ros::NodeHandle& getNodeHandle()
+	{
+		return m_nodeHandle;
+	}
+
+	static void setPublish(const std::string &topicStr, int queueLen, RosNode &node)
+	{
+		m_publisher = node.getNodeHandle().advertise<sensor_msgs::PointCloud2>(topicStr, queueLen);
+	}
+
 protected:
 	static void pointCloudCallback(const sensor_msgs::PointCloud &msg)
 	{
@@ -251,6 +261,11 @@ protected:
     	extract.filter (*cloud_p);
     	std::cout << "PointCloud representing the planar component: " << cloud_p->width * cloud_p->height << " data points." << std::endl;
 
+    	// publish top plane
+    	sensor_msgs::PointCloud2 msg3;
+    	pcl::toROSMsg(*cloud_p, msg3);
+    	m_publisher.publish(msg3);
+
     	/**** part 3: calculate the minimum rectangle which can contain the whole top plane pointcloud ****/
     	n = 0;
 
@@ -291,9 +306,11 @@ private:
 
 public:
 	static int m_numOfCommodities;
+	static ros::Publisher m_publisher;
 };
 
 int RosNode::m_numOfCommodities = 0;
+ros::Publisher RosNode::m_publisher = ros::Publisher();
 
 int main(int argc, char** argv)
 {
@@ -301,6 +318,7 @@ int main(int argc, char** argv)
 
 	RosNode extract_plane_node;
 	extract_plane_node.subscribe("/recon_pointcloud", 2);
+	RosNode::setPublish("/extract_plane", 2, extract_plane_node);
 
 	ros::spin();
 

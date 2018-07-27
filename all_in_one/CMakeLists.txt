@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
   pcl_ros
   message_generation
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -108,7 +109,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES all_in_one
-  CATKIN_DEPENDS roscpp rospy sensor_msgs std_msgs pcl_conversions pcl_ros message_runtime
+  CATKIN_DEPENDS roscpp rospy sensor_msgs std_msgs pcl_conversions pcl_ros message_runtime tf
 #  DEPENDS system_lib
 )
 

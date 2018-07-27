@@ -61,7 +61,7 @@ protected:
 			{
 				point.m_x = msg.x[i];
 				point.m_y = msg.y[i];
-				point.m_z = m_numScans * m_timeUnit * m_rateOfBelt;
+				point.m_z = -m_numScans * m_timeUnit * m_rateOfBelt;
 				point.m_i = msg.i[i];
 
 				m_pointBuffer.push_back(point);
@@ -121,7 +121,7 @@ int main(int argc, char** argv)
 
 			sensor_msgs::PointCloud pointCloud;
 			pointCloud.header.stamp = ros::Time::now();
-			pointCloud.header.frame_id = "process_frame";
+			pointCloud.header.frame_id = "base";
 
 			pointCloud.points.resize(tmp.size());
 
